@@ -1,0 +1,43 @@
+﻿@model Stefanini.Models.UserSys
+
+<div class="container">
+    <div class="row text-center ">
+        <div class="col-md-12">
+            <br />
+            <br />
+            <h2>Stefanini</h2>
+            <br />
+        </div>
+    </div>
+    @using (Html.BeginForm("Autenticate", "", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "frmLogin" }))
+    {        
+        @Html.AntiForgeryToken();
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                <div class="panel panel-default">
+                    <div align="center" class="panel-heading">
+                        <strong>Restricted Area</strong>
+                    </div>
+                    <div class="panel-body">
+                        <br />
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                            @Html.EditorFor(email => Model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "User", type = "text", id = "emailInput" } })
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            @Html.EditorFor(password => Model.password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", type = "password", id= "passwordInput" } })
+                        </div>
+                        <div id="divErrorDisplay" class="errorText">@ViewBag.loginFailMessage</div><br />
+                        <a href="javascript:enviarForm();" class="btn btn-primary">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script>
+        function enviarForm(){
+			document.getElementById("frmLogin").submit();
+        }
+</script>
